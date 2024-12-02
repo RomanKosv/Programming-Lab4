@@ -144,7 +144,7 @@ while (!fStop)
         case "move":
             if (array != null)
             {
-                SetArray(out array, array.Length, array.Where(i => i < 0).Concat(array.Where(i => i == 0)).Concat(array.Where(i => i > 0)));
+                SetArray(out array, array.Length, array.Where(i => i > 0).Concat(array.Where(i => i == 0)).Concat(array.Where(i => i < 0)));
                 ChangeMessage();
             }
             else NullMesssage();
