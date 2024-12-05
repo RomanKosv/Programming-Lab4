@@ -38,9 +38,16 @@ void InputElement(out int element)
     while (!int.TryParse(Console.ReadLine(), out element)) Console.Write("Элемент должен быть целым числом.\nВведите элемент:");
 }
 
-void DisplayArray(int[] array)
+void DisplayArray(int[] array, bool requireFull=false)
 {
-    foreach (int i in array.Take(array.Length - 1)) Console.Write($"{i} ");
+    for(int i = 0; i < array.Length - 1; i++)
+    {
+        Console.Write($"{array[i]} ");
+        if (!requireFull && i==100) {
+            Console.Write("... ");
+            break;
+        }
+    }
     Console.WriteLine($"{array[^1]}");
 }
 
@@ -93,8 +100,10 @@ bool IsSorted(int[] array)
     return true;
 }
 
-bool CheckAddCount(int count){
-    if (int.MaxValue-array.Length<count) {
+bool CheckAddCount(int count)
+{
+    if (int.MaxValue - array.Length < count)
+    {
         Console.WriteLine("Массив не может быть такой длины.");
         return false;
     }
@@ -180,14 +189,16 @@ while (!fStop)
                         break;
                     case "random":
                         InputCount(out int count);
-                        if (CheckAddCount(count)) {
+                        if (CheckAddCount(count))
+                        {
                             SetArray(out array, array.Length + count, array.Concat(Randoms()));
                             ChangeMessage();
                         }
                         break;
                     case "input":
                         InputCount(out count);
-                        if (CheckAddCount(count)) {
+                        if (CheckAddCount(count))
+                        {
                             SetArray(out array, array.Length + count, array.Concat(Inputs()));
                             ChangeMessage();
                         }
@@ -276,7 +287,7 @@ while (!fStop)
             else
             {
                 Console.WriteLine("Текцщий массив:");
-                DisplayArray(array);
+                DisplayArray(array, true);
             }
             break;
         case "":
