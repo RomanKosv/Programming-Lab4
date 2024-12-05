@@ -93,6 +93,14 @@ bool IsSorted(int[] array)
     return true;
 }
 
+bool CheckAddCount(int count){
+    if (int.MaxValue-array.Length<count) {
+        Console.WriteLine("Массив не может быть такой длины.");
+        return false;
+    }
+    return true;
+}
+
 const String helpMessage = """
 Для работы с массивом введите одну из команд:
 create для создания или пересоздания массива
@@ -172,13 +180,17 @@ while (!fStop)
                         break;
                     case "random":
                         InputCount(out int count);
-                        SetArray(out array, array.Length + count, array.Concat(Randoms()));
-                        ChangeMessage();
+                        if (CheckAddCount(count)) {
+                            SetArray(out array, array.Length + count, array.Concat(Randoms()));
+                            ChangeMessage();
+                        }
                         break;
                     case "input":
                         InputCount(out count);
-                        SetArray(out array, array.Length + count, array.Concat(Inputs()));
-                        ChangeMessage();
+                        if (CheckAddCount(count)) {
+                            SetArray(out array, array.Length + count, array.Concat(Inputs()));
+                            ChangeMessage();
+                        }
                         break;
                     default:
                         Console.WriteLine("Такго режима нет");
