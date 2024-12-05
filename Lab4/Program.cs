@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.Reflection.Metadata;
@@ -22,8 +23,8 @@ void SetArray(out int[] array, int lenght, IEnumerable<int> enumer)
 void InputLenght(out int lenght)
 {
     Console.Write("Введите длину массива:");
-    while (!int.TryParse(Console.ReadLine(), out lenght) || lenght < 0)
-        Console.Write("Длина должна быть целым неотриательным числом.\nВведите длину массива:");
+    while (!int.TryParse(Console.ReadLine(), out lenght) || lenght < 0 || lenght > Array.MaxLength)
+        Console.Write($"Длина должна быть целым неотриательным числом не более {Array.MaxLength}.\nВведите длину массива:");
 }
 
 void InputCount(out int lenght)
@@ -102,7 +103,7 @@ bool IsSorted(int[] array)
 
 bool CheckAddCount(int count)
 {
-    if (int.MaxValue - array.Length < count)
+    if (Array.MaxLength - array.Length < count)
     {
         Console.WriteLine("Массив не может быть такой длины.");
         return false;
