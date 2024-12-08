@@ -238,13 +238,18 @@ while (!fStop)
                     while (!int.TryParse(Console.ReadLine(), out element)) Console.Write("Искомый элемент должен быть целым числом.\nВведите искомый элемент:");
                     int start = 0;
                     int end = array.Length;
+                    int compares = 0;
                     while (end - start > 1 && array[start] != element)
                     {
+                        compares+=2;
                         if (array[(start + end) / 2] <= element) start = (start + end) / 2;
                         else end = (start + end) / 2;
+                        compares++;
                     }
-                    if (array.Length != 0 && array[start] == element) Console.WriteLine($"Искомое число находится на позиции {start + 1}");
-                    else Console.WriteLine("В массиве нет искомого числа");
+                    compares++;
+                    if (end - start > 1) compares++;
+                    if (array.Length != 0 && array[start] == element) Console.WriteLine($"Искомое число находится на позиции {start + 1}, потребовалось {compares+2} сравнений.");
+                    else Console.WriteLine($"В массиве нет искомого числа, потребовалось {compares} сравнений.");
                 }
                 else Console.WriteLine("Массив должен быть отсортирован");
             }
