@@ -136,7 +136,7 @@ while (!fStop)
             break;
         case "create":
             Console.WriteLine("Введите режим создания или help");
-            switch (Console.ReadLine())
+            restart_create:switch (Console.ReadLine())
             {
                 case "help":
                     Console.WriteLine("""
@@ -144,7 +144,7 @@ while (!fStop)
                     random для создания из случайных чисел от -100 до 100
                     input для вводя с клавиатуры
                     """);
-                    break;
+                    goto restart_create;
                 case "random":
                     InputLenght(out int lenght);
                     SetArray(out array, lenght, Randoms());
@@ -157,6 +157,7 @@ while (!fStop)
                     break;
                 default:
                     Console.WriteLine("Такого режима нет");
+                    //goto restart_create;
                     break;
             }
             break;
@@ -180,7 +181,7 @@ while (!fStop)
             if (array != null)
             {
                 Console.WriteLine("Введите режим добавления элементов или help:");
-                switch (Console.ReadLine())
+                restart_addition:switch (Console.ReadLine())
                 {
                     case "help":
                         Console.WriteLine("""
@@ -188,7 +189,7 @@ while (!fStop)
                         random для создания из случайных чисел от -100 до 100
                         input для вводя с клавиатуры
                         """);
-                        break;
+                        goto restart_addition;
                     case "random":
                         InputCount(out int count);
                         if (CheckAddCount(count))
@@ -207,6 +208,7 @@ while (!fStop)
                         break;
                     default:
                         Console.WriteLine("Такго режима нет");
+                        //goto restart_addition;
                         break;
                 }
             }
@@ -260,7 +262,7 @@ while (!fStop)
             if (array != null)
             {
                 Console.WriteLine("Введите способ сортировки или help:");
-                switch (Console.ReadLine())
+                restart_sort:switch (Console.ReadLine())
                 {
                     case "choose":
                         for (int start = 0; start < array.Length - 1; start++)
@@ -277,9 +279,10 @@ while (!fStop)
                         Введите одну из следующих команд, для выбора режима сортировки:
                         choose для сортировки выбором
                         """);
-                        break;
+                        goto restart_sort;
                     default:
                         Console.WriteLine("Такого способа нет");
+                        //goto restart_sort;
                         break;
                 }
             }
